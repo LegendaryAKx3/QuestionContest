@@ -162,3 +162,4 @@ flask_session/
 contest.db
 
 node_modules/
+static/css/main.css
