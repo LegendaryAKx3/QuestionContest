@@ -3,10 +3,12 @@ from functools import wraps
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from flask_session import Session
 
 app = Flask(__name__)
+
+#Initialize DB
+db = SQL("sqlite:///contest.db")
 
 # Initialize session
 app.config["SESSION_PERMANENT"] = False
