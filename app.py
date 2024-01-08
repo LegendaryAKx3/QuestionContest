@@ -27,8 +27,17 @@ def login_required(f):
 @app.route("/")
 @login_required
 def index():
-    leaderboard = db.execute("select * from accounts order by questions desc limit 10")
-    return render_template("index.html", leaderboard=leaderboard)
+    leaderboard = db.execute("select * from accounts order by questions desc limit 10;")
+    questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
+    return render_template("index.html", leaderboard=leaderboard, questions = questions)
+
+@app.route("/add", methods=["POST"])
+@login_required
+def add():
+    inputted = request.form.get("add")
+    user_questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
+    db.execute("update accounts set questions = ? where id = ?;", user_questions + inputted, session["uuid"])
+    return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

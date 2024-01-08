@@ -2,3 +2,9 @@
 {% for user in leaderboard %}
 <p>{{ user.username }}</p>
 {% endfor %}
+
+<p>{{ questions }}</p>
+<form action="/add" method="post">
+    <input type="number" name="add" placeholder="Add">
+    <button type="submit">Add</button>
+</form>
