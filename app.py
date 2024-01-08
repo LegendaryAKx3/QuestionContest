@@ -24,6 +24,12 @@ def login_required(f):
 
     return decorated_function
 
+@app.route("/")
+@login_required
+def index():
+    leaderboard = db.execute("select * from accounts order by questions desc limit 10")
+    return render_template("index.html", leaderboard=leaderboard)
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     session.clear()
@@ -93,9 +99,10 @@ def register():
             )
 
         db.execute(
-            "INSERT INTO accounts (username, hash) VALUES(?, ?);",
+            "INSERT INTO accounts (username, hash, questions) VALUES(?, ?, ?);",
             username,
             generate_password_hash(password),
+            0
         )
         return redirect("/")
     return render_template("register.html")
