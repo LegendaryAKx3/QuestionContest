@@ -37,7 +37,7 @@ def add():
     # Add an inputted number of questions to the users question count
     inputted = request.form.get("add")
     user_questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
-    db.execute("update accounts set questions = ? where id = ?;", user_questions + inputted, session["uuid"])
+    db.execute("update accounts set questions = ? where id = ?;", int(user_questions) + int(inputted), session["uuid"])
     return redirect("/")
 
 @app.route("/subtract", methods=["POST"])
@@ -45,7 +45,7 @@ def subtract():
     # Remove an inputted number of questions from the user's question count
     inputted = request.form.get("subtract")
     user_questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
-    db.execute("update accounts set questions = ? where id = ?;", user_questions - inputted, session["uuid"])
+    db.execute("update accounts set questions = ? where id = ?;", int(user_questions) - int(inputted), session["uuid"])
     return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
