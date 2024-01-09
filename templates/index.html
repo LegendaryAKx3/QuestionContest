@@ -13,17 +13,27 @@
         {% for user in leaderboard %}
         <th>
           {% if user.rank==1 %}
-          <div class="badge badge-outline border-yellow-500 text-yellow-500">
+          <div
+            class="badge badge-outline border-yellow-500 text-yellow-500 border-2 text-lg p-3 bg-opacity-30 bg-yellow-500"
+          >
             1
           </div>
           {% elif user.rank==2 %}
-          <div class="badge badge-outline border-gray-400 text-gray-400">2</div>
+          <div
+            class="badge badge-outline border-gray-400 text-gray-400 border-2 text-lg p-3 bg-opacity-30 bg-gray-400"
+          >
+            2
+          </div>
           {% elif user.rank==3 %}
-          <div class="badge badge-outline border-amber-700 text-amber-700">
+          <div
+            class="badge badge-outline border-amber-700 text-amber-700 border-2 text-lg p-3 bg-opacity-30 bg-amber-700"
+          >
             3
           </div>
           {% else %}
-          <div class="badge badge-outline">{{ user.rank }}</div>
+          <div class="badge badge-outline border-2 text-lg p-3 bg-opacity-30">
+            {{ user.rank }}
+          </div>
           {% endif %}
         </th>
         <td>{{ user.username }}</td>
