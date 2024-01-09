@@ -1,64 +1,62 @@
 {% extends "layout.html" %} {% block body %}
 
-<div class="relative flex flex-col justify-center h-screen overflow-hidden">
-  <div
-    class="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg"
-  >
-    <h1 class="text-3xl font-semibold text-center text-gray-700">DaisyUI</h1>
-    <form class="space-y-4">
-      <div>
-        <label class="label">
-          <span class="text-base label-text">Email</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Email Address"
-          class="w-full input input-bordered"
-        />
-      </div>
-      <div>
-        <label class="label">
-          <span class="text-base label-text">Password</span>
-        </label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          class="w-full input input-bordered"
-        />
-      </div>
-      <a
-        href="#"
-        class="text-xs text-gray-600 hover:underline hover:text-blue-600"
-        >Forget Password?</a
-      >
-      <div>
-        <button class="btn btn-block">Login</button>
-      </div>
-    </form>
+<section class="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
+  <div class="relative flex flex-col justify-center h-screen overflow-hidden">
+    <div
+      class="w-full p-6 m-auto dark:bg-gray-900 bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg"
+    >
+      <h1 class="text-3xl font-semibold text-center text-gray-700">
+        QuestionContest
+      </h1>
+      <form class="space-y-4" action="/login" method="post">
+        <div>
+          <label class="label">
+            <span class="text-base label-text">Username</span>
+          </label>
+          <input
+            type="text"
+            class="w-full input input-bordered"
+            autocomplete="off"
+            autofocus
+            id="username"
+            name="username"
+            placeholder="Username"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="text-base label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            class="w-full input input-bordered"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <div>
+          <button
+            class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            type="submit"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+            style="
+              background: linear-gradient(
+                to right,
+                #ee7724,
+                #d8363a,
+                #dd3675,
+                #b44593
+              );
+            "
+          >
+            Log in
+          </button>
+        </div>
+      </form>
+      <p>Don't have an account? <a href="/register">Sign Up</a></p>
+    </div>
   </div>
-  <div></div>
-
-  <form action="/login" method="post">
-    <input
-      autocomplete="off"
-      autofocus
-      id="username"
-      name="username"
-      placeholder="Username"
-      type="text"
-    />
-
-    <input
-      id="password"
-      name="password"
-      placeholder="Password"
-      type="password"
-    />
-    <button type="submit">Log in</button>
-  </form>
-  <br />
-
-  <p>Don't have an account? <a href="/register">Sign Up</a></p>
-</div>
-
+</section>
 {% endblock %}
