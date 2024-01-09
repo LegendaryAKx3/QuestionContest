@@ -2,7 +2,7 @@
 
 <p>Hello World!</p>
 {% for user in leaderboard %}
-<p>{{ user.username }}</p>
+<p>{{ user.rank }}. {{ user.username }} - {{ user.questions }}</p>
 {% endfor %}
 
 <p>{{ questions }}</p>

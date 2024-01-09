@@ -28,6 +28,8 @@ def login_required(f):
 @login_required
 def index():
     leaderboard = db.execute("select * from accounts order by questions desc limit 10;")
+    for i in range(len(leaderboard)):
+        leaderboard[i]["rank"] = i + 1
     questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
     return render_template("index.html", leaderboard=leaderboard, questions = questions)
 
