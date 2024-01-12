@@ -45,13 +45,16 @@
 </div>
 <p>{{ questions }}</p>
 <form action="/add" method="post">
-  <input type="number" name="add" placeholder="Add" />
+  <input type="number" name="add" placeholder="Add" required/>
   <button type="submit">Add</button>
 </form>
 
 <form action="/subtract" method="post">
-  <input type="number" name="subtract" placeholder="Subtract" />
+  <input type="number" name="subtract" placeholder="Subtract" required />
   <button type="submit">Subtract</button>
 </form>
+{% for mesg in get_flashed_messages() %}
+<p>{{ mesg }}</p>
+{% endfor %}
 
 {% endblock %}

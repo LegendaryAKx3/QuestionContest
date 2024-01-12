@@ -1,7 +1,7 @@
 from functools import wraps
 
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_session import Session
 
@@ -38,8 +38,11 @@ def index():
 def add():
     # Add an inputted number of questions to the users question count
     inputted = request.form.get("add")
-    user_questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
-    db.execute("update accounts set questions = ? where id = ?;", int(user_questions) + int(inputted), session["uuid"])
+    if int(inputted) > 20:
+        flash("Try not to add too many questions at once")
+    else:
+        user_questions = db.execute("select * from accounts where id = ?;", session["uuid"])[0]["questions"]
+        db.execute("update accounts set questions = ? where id = ?;", int(user_questions) + int(inputted), session["uuid"])
     return redirect("/")
 
 @app.route("/subtract", methods=["POST"])
