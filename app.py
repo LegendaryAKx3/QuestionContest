@@ -61,8 +61,9 @@ def login():
     if request.method == "POST":
         # Check both username and password are submitted
         if (not request.form.get("username")) or (not request.form.get("password")):
+            flash("Please enter both username and password")
             return render_template(
-                "login.html", error="Please enter both username and password"
+                "login.html"
             )
 
         user = db.execute(
@@ -74,7 +75,8 @@ def login():
         if len(user) != 1 or not check_password_hash(
             user[0]["hash"], request.form.get("password")
         ):
-            return render_template("login.html", error="Invalid login information")
+            flash("Invalid login information")
+            return render_template("login.html")
 
         # store account login status until session is cleared
         session["uuid"] = user[0]["id"]
@@ -99,26 +101,29 @@ def register():
         confirmation = request.form.get("confirmation")
 
         if not username:
+            flash("Username field cannot be empty")
             return render_template(
-                "register.html", error="Username field cannot be empty"
+                "register.html"
             )
 
         for entry in db.execute("SELECT username FROM accounts;"):
             if username == entry["username"]:
+                flash("Username is Already Taken")
                 return render_template(
-                    "register.html", error="Username is Already Taken"
+                    "register.html"
                 )
 
         # check password valididty
         if password != confirmation or (not password) or (not confirmation):
+            flash("Invalid password or confirmation")
             return render_template(
-                "register.html", error="Invalid password or confirmation"
+                "register.html"
             )
 
         elif (len(password) < 8) or (password.lower() == password):
+            flash("Password Must be at Least 8 Characters Long and Contain a Capital Letter")
             return render_template(
-                "register.html",
-                error="Password Must be at Least 8 Characters Long and Contain a Capital Letter",
+                "register.html"
             )
 
         db.execute(
